@@ -26,24 +26,33 @@ Each element in nums appears exactly three times except for one element which ap
  */
 
 // initial attempt
+// var singleNumber = function(nums) {
+//     let map = {}
+    
+//     for (let i = 0; i < nums.length; i++) {
+//         let num = nums[i];
+        
+        
+//         if (!map[num]) {
+//             map[num] = 1
+//         } else {
+//             map[num]++
+//         }
+        
+//     }
+    
+//     for (num in map) {
+//         if (map[num] === 1) {
+//             return num
+//         }
+//     }
+// };
+
 var singleNumber = function(nums) {
-    let map = {}
-    
-    for (let i = 0; i < nums.length; i++) {
-        let num = nums[i];
-        
-        
-        if (!map[num]) {
-            map[num] = 1
-        } else {
-            map[num]++
-        }
-        
-    }
-    
-    for (num in map) {
-        if (map[num] === 1) {
-            return num
-        }
-    }
+   for(var i = 0; i < nums.length; i++){
+		x = nums.indexOf(nums[i]);
+		y = nums.lastIndexOf(nums[i]);
+		if(x == y)
+			return nums[i];
+   }
 };
