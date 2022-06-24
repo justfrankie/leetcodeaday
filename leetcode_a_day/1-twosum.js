@@ -47,17 +47,37 @@ var twoSum = function(nums, target) {
     }
 };
 
-// second approach, uses map data structure
+// REACTO process
+/*
+- Repeat
+- Example [1, 3, 5, 4] target = 5, return [0, 4] example [1, 2] 3 return the same array
 
-// var twoSum = function(nums, target) { // hash map one pass
-//      let map = new Map; // create new map structure
-    
-//     for (let i = 0; i < nums.length; i++) {
-//         let complement = target - nums[i]; 
-        
-//         if (map.has(complement)) { // look for the complementary number as passes through
-//             return [map.get(complement), i]
-//         }
-//         map.set(nums[i], i); // otherwise, set nums with current index
-//     }
-// }
+    hash map: { // target is 5
+    1: 4,
+    3: 2,
+    5: 0,
+    4: 1
+    }
+
+    - Example [3, 2, 3] target = 6, return [0, 2]
+    hash map: { // target is 6
+    3: 0,
+    2: 1,
+    }
+
+
+iterate over the array the second time, check each num for the difference in the hash
+Approaches
+    iterate over nums array, find difference between target and curr num
+    if the difference is found in the hash, return that result
+- Coding
+    // early exit when length is itself and another number
+    // create has map
+    //iterate over nums array
+    //check if hash has the difference between two numbers && can't be itself
+        // return the pair of indicies
+    // else create the hash key with current number, and value as the index
+    // continue to next index
+- Test
+- Optimise
+*/
