@@ -36,15 +36,36 @@ Only one valid answer exists.
  * @return {number[]}
  */
 
-var twoSum = function(nums, target) {
-    const map = {};
+// var twoSum = function(nums, target) {
+//     const map = {};
     
-    for(let i = 0; i < nums.length; i++){
-        if(map[nums[i] ]>=0){ // check if there's a complementary numbers' index stored
-            return [ map[nums[i] ] , i ]
-        }
-        map[target-nums[i]] = i // stores complementary number's index in map instead
-    }
+//     for(let i = 0; i < nums.length; i++){
+//         if(map[nums[i] ]>=0){ // check if there's a complementary numbers' index stored
+//             return [ map[nums[i] ] , i ]
+//         }
+//         map[target-nums[i]] = i // stores complementary number's index in map instead
+//     }
+// };
+
+var twoSum = function(nums, target) {
+    // early exit
+    if (nums.length === 2) {
+        return [0, 1]
+    };
+    
+   // create hash variable
+   let hash = {} 
+   
+   // iterate over nums array
+   for (let i = 0; i < nums.length; i++) {
+       const curr = nums[i];
+       const difference = target - curr
+   if (hash[difference] !== undefined && hash[difference] !== i){
+    return [i, hash[difference]] // add each value as the key
+    // add the difference as the value
+   }
+       hash[curr] = i
+   }
 };
 
 // REACTO process
