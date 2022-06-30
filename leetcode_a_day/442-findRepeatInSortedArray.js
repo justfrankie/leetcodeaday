@@ -28,30 +28,37 @@ n == nums.length
 Each element in nums appears once or twice.
 
 */
-
-function findRepeat(numbers) {
-    if (numbers.length < 2) {
-      throw new Error('Finding duplicate requires at least two numbers');
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var findDuplicates = function(nums) {
+    // early exit cases
+    // if input length is 1 return []
+    if (nums.length === 1) {
+        return []
+    // if input length is 2 AND first and second num are different, return []
+    } else if (nums.length === 2 && nums[0] !== nums[1]) {
+        return []
     }
-  
-    const n = numbers.length - 1;
-    const sumWithoutDuplicate = (n * n + n) / 2;
-    const actualSum = numbers.reduce((acc, cur) => acc +  cur, 0);
-  
-    return actualSum - sumWithoutDuplicate;
-  }
 
-  let assertEquals = (actual, expected, message) => {
-    // if (actual.length !== expected.length ) return false;
-      if (parseInt(actual) !== parseInt(expected)) {
-        console.log(`X - FAILED Actual: ${actual} Expected: ${expected}!`);
-        return;
-      } else {
-        console.log(`PASSED! ${message} PASSED! `);
-        return;
-      }
-  };
-  
-  assertEquals(findRepeat([1, 2, 2, 3, 4]), 2, "Should return 2");
-  assertEquals(findRepeat([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10]), 10, "Should return 10");
+    // create tracking array variable
+    let result = [];
+    // create hash map to keep track of iterated numbers
+    let hash = {};
+    
+    // iterate over the nums array
+    for (let i = 0; i < nums.length; i++) {
+        // if the current num cannot be accessed as a key in the hash map
+        if (hash[nums[i]] === undefined) {
+            //set the num as key and value as num in hashmap (or could be anything)
+            hash[nums[i]] = nums[i];
+        } else {
+        //else push the num into the result array
+            result.push(nums[i])
+        }
+    }
+    // return result array
+    return result;
+};
   
