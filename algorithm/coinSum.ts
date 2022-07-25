@@ -17,3 +17,5 @@ makeChange(1) === 1
 // aka, there's only two ways to make 2p. that's with two, 1p pieces or with a single 2p piece
 makeChange(2) === 2
 */
+
+const makeChange = (sum: number): number => 
