@@ -40,28 +40,23 @@ s consists of parentheses only '()[]{}'.
  * @param {string} s
  * @return {boolean}
  */
-let isValid = (s) => {
-  if (s === undefined || s === null) { return false }
-  let stack = []; // stack variable
-  let map = { // map of CLOSED symbols
-    ')': '(',
-    '}': '{',
-    ']': '['
-  } 
-   for (let i = 0; i < s.length; i++){ // iterate over input
-    let curr = s[i];
-    let temp;
-
-    if (map[curr] === undefined) { // if open symbol,
-    //  push into stack
-      stack.push(curr)
-    } else { // if closed symbol
-      // if stack is empty, push dummy value into stack as placeholder
-      if (stack.length === 0) { stack.push('dummy')} else { temp = stack.pop(); }
-
-    if (temp !== map[curr]) {return false}
+var isValid = function(s) {
+    // edge case: return true if s.length < 1
+    if (s.length < 1) return true
+    const symbols = {
+        "(": ")",
+        "{": "}",
+        "[": "]"
+    }
+    const check = []
+    // each beginning symbol should have an end symbol to be considered as complete
+   for (let i = 0; i <s.length; i++){ // iterate over s
+    if (symbols[s[i]]) {// whenever a beginning symbol is encountered
+       check.push(symbols[s[i]]) // push the end symbol in the check array
+    } else { // whenever an end symbol is encountered 
+    // should remove the corresponding beginning symbol present in the check array
+      if (check.pop() !== s[i]) return false  // if the popped item from the check array does not correspond to the last open symbol, should return false
     }
    }
-    // at the end, return boolean based if stack is empty or not
-    return (stack.length) ? false : true
-}
+    return (check.length < 1 ? true : false) // at the end of the iteration, return true if check array length is 0
+};
