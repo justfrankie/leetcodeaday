@@ -67,22 +67,21 @@ function countNumberOfSubarrays(arr, k) {
     // Write your code here
     // [1, 2, 3, 0]
     // [0, 0, 0, 1]
-    
+
     // create count variable = 0
     let count = 0;
-    // iteration 1: 1, less than target (k))
-    for (let a = 0; a < arr.length; a++){
+    for (let a = 0; a < arr.length; a++) {
         // create pointer a as arr[i]
+        let sum = 0;
         // create a second loop, with b as the second pointer
-        let accurred = 0;
         for (let b = a; b < arr.length; b++) {
         // move the variable b down the subsequent numbers, keep adding to the current value as long as its below to k
-        accurred += arr[b]
-    if (accurred === k) {
-            count++
-        }
-        }
-        // outside of the while loop, if results = k, add count ++
+            sum += arr[b]
+            // if results = k, add count ++
+            if (sum === k) {
+                    count++
+                }
+            }
     }
     // return count
     return count
