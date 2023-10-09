@@ -40,6 +40,8 @@ s consists of parentheses only '()[]{}'.
  * @param {string} s
  * @return {boolean}
  */
+// Solution 1
+
 var isValid = function(s) {
     // edge case: return true if s.length < 1
     if (s.length < 1) return true
@@ -60,3 +62,36 @@ var isValid = function(s) {
    }
     return (check.length < 1 ? true : false) // at the end of the iteration, return true if check array length is 0
 };
+
+// Solution 2
+
+var isValid = function(s) {
+    // if length of s is less than 1, return false
+    if (s.length < 2) {return false}
+
+    // create a storage variable to keep track of symbols
+    const stack = []
+    const sym = {
+        "(": ")",
+        "{": "}",
+        "[": "]",
+    }
+    // s = "([)]" FILO
+    // iterate over s
+    for (let i = 0; i < s.length; i++) {
+        const letter = s[i]
+        // each time we encounter an open symbol
+        if (sym[letter]) {
+            stack.push(sym[letter])
+        } else if (letter === stack[stack.length-1]) { // if letter matches the last closed symbol of the stack 
+            // remove the symbol in the stack
+            stack.pop()
+        } else {
+            return false
+        }
+    }
+
+    // if there are anything left in the storage variable
+    return stack.length === 0
+};
+
