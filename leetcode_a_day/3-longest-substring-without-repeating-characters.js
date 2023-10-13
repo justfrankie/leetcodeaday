@@ -38,32 +38,31 @@ s consists of English letters, digits, symbols and spaces.
  * @return {number}
  */
 var lengthOfLongestSubstring = function(s) {
-    let max_len = 0;
+    if (s.length < 2) return s.length
+    let hash = {};
+    let max = 0;
     let curr = 0;
-    let hash = {}; 
-    
-    if(s.length < 2) { return s.length }
-    
-    for(let i = 0; i < s.length;  i++) {
-        let char = s[i]
-        if(hash[char] == null) {
-            curr += 1;
-        } else {
-            curr = Math.min(i - hash[char], curr + 1);
+
+    for (let i = 0; i< s.length; i++) {
+        const char = s[i];
+        if (hash[char] == null) { // havent seen
+           curr+=1
+        } else { // already seen, so backtrack from curr to the last repeated letter
+            curr = Math.min(curr + 1, i - hash[char]) // compare between curr value with last repeated letter index
         }
-        max_len = Math.max(max_len, curr);
-        hash[char] = i; //save the index
+        max = Math.max(max, curr) // keep track of the max value between curr anchor and longest length
+        hash[char] = i; // save index
     }
-    return max_len;
+    return max
 };
 
-/*
+ /*
 The idea behind this code is to use hash maps to keep track of seen substrings.
 Obviously if any string is less than two, the longest substring is equal to the length of that substring.
 However, if not, then we would have to consider another approach.
 
 Consider a string:
-_ _ _ _ _ a _ _ _ _ _ f _ _ _ f _ _ _ a
+_ _ _ _ _ a _ _ _ _ _ f(curr = 16) _ _ _ f _ _ _ a
 
 Where _ means a distinct character from all the others.
 
@@ -71,7 +70,7 @@ As we transverse the string, we put a character into the hash table if it's not 
 
 If there character is already in the string, we have to update the index after we do the following procedures:
 
-We have a curr that keeps track of the length of the substring that has not seen an already seen character. As we get to the second f, curr = 16. So, so far the max_len is going to be max(max_len = 0, curr = 16) [Since max_len has yet to be updated].
+We have the curr variable that keeps track of the length of the substring that has not seen an already seen character. As we get to the second f, curr = 16. So, so far the max_len is going to be max(max_len = 0, curr = 16) [Since max_len has yet to be updated].
 
 Now, we start our curr from the character after the first f. curr now becomes the distance between the first f and the second f, which is i - hash[s[i]]. We update the hash and continue.
 
