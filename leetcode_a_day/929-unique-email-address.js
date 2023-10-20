@@ -36,21 +36,39 @@ Local names do not start with a '+' character.
  
  */
  
- var numUniqueEmails = function (emails) {
-  const set = new Set();
+var numUniqueEmails = function(emails) {
+    // parser function
+    const parseEmail = (email) => {
+        if (email.indexOf('@') < 0 || email.indexOf('.') < 0) return null
+        // example: "test.email+alex@leetcode.com"
+       
+        // parse local string
+            // everything before the '@' symbol
+            // if '+' symbol exists, remove the ignored portion after everything after '+' up until '@' 
+            // local name looks out to remove period
+             const local = email.substring(0, email.indexOf('+') > 0 ? email.indexOf('+') : email.indexOf('@')).replaceAll('.', '')
+        // separate local name between domain name
 
-  for (const email of emails) {
-    const arr = email.split("@");
+        // parse domain name
+        const domain = email.substring(email.indexOf('@'), email.length)
+            // everything after the '@' symbol
+            return local+domain
+    }
 
-    // ignore everything after first occurence of +
-    arr[0] = (arr[0].split("+"))[0]; 
+    // create map variable
+    const map = {}
 
-    // replace all dots with nothing i.e. empty string
-    arr[0] = arr[0].replace(/\./g, "");
+    // loop over emails array and call parseEmail on each email
+    for (let email of emails) {
+        const parsedEmail = parseEmail(email)
 
-    // add final email ( processed ) to set
-    set.add(arr.join("@"));
-  }
+        // if the parsed email doesn't exist in the map
+        if (!map[parsedEmail]) {
+            // add the parsed email to a map
+            map[parsedEmail] = parsedEmail
+        }
+    }
 
-  return set.size;
+    // return the number of email keys from the map
+    return Object.keys(map).length
 };
