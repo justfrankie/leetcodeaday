@@ -34,29 +34,50 @@ Constraints:
  * @param {number[]} nums2
  * @return {number[][]}
  */
+
+// Approach 1: two sets
 var findDifference = function(nums1, nums2) {
-
     // create set1
-    let set1 = [], set2 = []
     // create set2
+    nums1 = new Set(nums1)
+    nums2 = new Set(nums2)
 
-    // create a variable for the longer list length
-    let long = nums1.length >= nums2.length ? nums1.length : nums2.length;
-    // iterate over length of the longer length
-    for (let i = 0; i < long; i++) {
-        // check if curr num1 exists AND whether if NOT exists in nums2
-        const num1 = nums1[i], num2 = nums2[i]
-        if (num1 !== undefined && !set1.includes(num1) && !nums2.includes(num1)) {
-            // set add nums1 num
-            set1.push(num1)
-        }
-         if (num2 !== undefined && !set2.includes(num2) && !nums1.includes(num2)) {
-        // else if curr num2 number exists AND whether if NOT exists in nums1
-            // set add nums2 num
-            set2.push(num2)
+
+    for (num of nums1) {
+        if (nums2.has(num)) {
+            nums1.delete(num)
+            nums2.delete(num)
         }
     }
-
-    return [set1, set2]
+   
+    return [Array.from(nums1), Array.from(nums2)]
     // results array fill with results of set1, set2
 };
+
+// Approach 2: for loop push to new array
+// var findDifference = function(nums1, nums2) {
+
+//     // create set1
+//     let set1 = [], set2 = []
+//     // create set2
+
+//     // create a variable for the longer list length
+//     let long = nums1.length >= nums2.length ? nums1.length : nums2.length;
+//     // iterate over length of the longer length
+//     for (let i = 0; i < long; i++) {
+//         // check if curr num1 exists AND whether if NOT exists in nums2
+//         const num1 = nums1[i], num2 = nums2[i]
+//         if (num1 !== undefined && !set1.includes(num1) && !nums2.includes(num1)) {
+//             // set add nums1 num
+//             set1.push(num1)
+//         }
+//          if (num2 !== undefined && !set2.includes(num2) && !nums1.includes(num2)) {
+//         // else if curr num2 number exists AND whether if NOT exists in nums1
+//             // set add nums2 num
+//             set2.push(num2)
+//         }
+//     }
+
+//     return [set1, set2]
+//     // results array fill with results of set1, set2
+// };
