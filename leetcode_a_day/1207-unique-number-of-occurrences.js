@@ -3,35 +3,24 @@
  * @return {boolean}
  */
 
-// Input: arr = [1,2]
-// Output: false
-
 var uniqueOccurrences = function(arr) {
     // create a hash map variable
-    let hash = {};
+    let map = new Map();
 
-    // iterate over arr
-    for (let num of arr) {
-        if (hash[num] !== undefined) {
-        // if value exists, ++ increment the value on the key
-            hash[num]++
-        } else {
-        // else set value of num key = 1
-            hash[num] = 1
-        }
-    }
-    // create a results hash map
-    let results = []
+    // iterate over arr and map each element into map
+    arr.forEach((ele) => {
+       return map.set(ele, (map.get(ele) || 0)+1)
+    })
 
     // iterate over the results map to check if value is in hashmap
-        for (let occr in hash) {
-        // returns false if value is in hashmap
-            if (results.includes(hash[occr])) {
-                return false
-            } else {
-                results.push(hash[occr])
-            }
+    let results = new Map();
+    for (let [key, value] of map.entries()) {
+        if (results.has(value)) {
+            return false
+        } else {
+            results.set(value, true) // Map {'1', 1}
         }
-        // return true outside
-        return true
+    }
+    // else return true
+    return true
 };
