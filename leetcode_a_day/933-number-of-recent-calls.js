@@ -42,6 +42,8 @@ var RecentCounter = function() {
     this.requests = [] 
 };
 
+// Solution 1: for loop and count
+/** 
 RecentCounter.prototype.ping = function(t) {
     this.requests.push(t)
     // specifically, return the number of requests that have happened in the range [t - 3000, t]
@@ -58,6 +60,19 @@ RecentCounter.prototype.ping = function(t) {
     }
     // return the number of requests that has happened in the 3000 milliseconds (including the new request)
     return count
+}; 
+**/
+// Solution 2: queue and dequeue
+RecentCounter.prototype.ping = function(t) {
+    this.requests.push(t)
+    // specifically, return the number of requests that have happened in the range [t - 3000, t]
+    
+    // match the requests between [t - 3000, t]
+    while (this.requests[0] < t - 3000) {
+        this.requests.shift();
+    }
+    // return the number of requests that has happened in the 3000 milliseconds (including the new request)
+    return this.requests.length
 };
 
 /** 
