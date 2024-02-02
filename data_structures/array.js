@@ -1,5 +1,3 @@
-// arrayMethods.js
-
 // Define a simple Array class to work with
 class MyArray {
   constructor() {
@@ -14,8 +12,6 @@ class MyArray {
   }
 
   pop() {
-    // should remove the last item of the array
-    // console.log(this.data[Object.keys(this.data).length - 1]);
     delete this.data[Object.keys(this.data).length - 1];
     return this.data;
   }
@@ -48,10 +44,6 @@ class MyArray {
       newData[i] = Object.values(this.data)[oldObjCount];
       oldObjCount++;
     }
-    //   deleted = this.data[Object.keys(this.data)[0]];
-    //   delete this.data[Object.keys(this.data)[0]];
-
-    // return Object.Keys(this.data).length;
     return newData;
   }
 
@@ -127,7 +119,6 @@ function testShift() {
   console.log("Pushing 'oranges'. New length:", myArray.push("oranges"));
 
   const deleted = myArray.shift();
-  //   console.log("Popping. Removed element:", myArray.shift());
   console.log(
     "Expect shifted item to be apple:",
     deleted == "apple" ? "Pass" : "Fail"
@@ -183,10 +174,10 @@ function testSlice() {
 }
 
 // Run the test functions
-// testPushMethod();
-// testPopMethod();
-// testShift();
-// testUnshift();
-// testMap();
-// testConcat();
+testPushMethod();
+testPopMethod();
+testShift();
+testUnshift();
+testMap();
+testConcat();
 testSlice();
