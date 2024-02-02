@@ -6,74 +6,32 @@ class MyArray {
   }
 
   push(item) {
-    this.data[this.length] = item;
-    this.length++;
-    return this.data;
+    // returns the data object
   }
 
   pop() {
-    delete this.data[Object.keys(this.data).length - 1];
-    return this.data;
+    // returns the data object
   }
 
   shift() {
-    let deleted;
-    if (Object.keys(this.data).length > 1) {
-      deleted = this.data[Object.keys(this.data)[0]];
-      delete this.data[Object.keys(this.data)[0]];
-    }
-    return deleted;
+    // returns the deleted item
   }
 
   unshift(items) {
-    let newData = {}; // Initialize newData as an empty object
-
-    if (Object.values(arguments).length > 1) {
-      Object.values(arguments).forEach(
-        (argument, index) => (newData[index] = argument)
-      );
-    } else {
-      newData = { 0: items };
-    }
-    let oldObjCount = 0;
-    for (
-      let i = Object.keys(newData).length;
-      oldObjCount < Object.keys(this.data).length;
-      i++
-    ) {
-      newData[i] = Object.values(this.data)[oldObjCount];
-      oldObjCount++;
-    }
-    return newData;
+    // returns a new data object containing unshifted items
   }
 
   map(callback) {
-    let returned = {};
-
-    for (let i = 0; i < Object.values(this.data).length; i++) {
-      returned[i] = callback(this.data[i]);
-    }
-
-    return returned;
+    // returns a new data object containing mapped items
   }
 
   concat(arr) {
-    arr.forEach((item) => (this.data[Object.keys(this.data).length] = item));
-    return this.data;
+    // returns the existing modified data object
   }
 
   slice(beginning, end) {
-    const newArray = new MyArray();
-    let startIndex = beginning || 0;
-    let endIndex = end || Object.values(this.data).length;
-
-    for (let i = startIndex; i < endIndex; i++) {
-      newArray.push(this.data[i]);
-    }
-
-    return newArray;
+    // returns a new data object containing sliced items
   }
-  // Other array methods can be added here as needed
 }
 // Refactored testPushMethod
 function testPushMethod() {
