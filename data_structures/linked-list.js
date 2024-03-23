@@ -1,80 +1,59 @@
 class Node {
-   constructor(data) {
-       this.data = data
-       this.next = null
-   }
+  constructor(data, next = null) {
+    this.data = data;
+    this.next = next;
+  }
 }
 
 class LinkedList {
-    constructor(head = null) {
-        this.head = head
-    }
+  constructor() {
+    this.head = null;
+    this.size = 0;
+  }
 
-    add(val) {
-        let tail = this.head;
-        while(tail.next !== null) {
-            tail = tail.next;
-        }
-        tail.next = new Node(val);
+  // insert first node
+  insertFirst(data) {}
 
-        return this.head;
-    }
+  // insert last node
+  insertLast(data) {}
 
-    size() { // returns the amount of nodes in the Linked List
-        let count = 0;
-        let node = this.head;
+  // insert at index
+  insertAtIndex(data, index) {}
 
-        while(node) {
-            count++;
-            node = node.next
-        }
-        return count;
-    }
+  // get at index
+  getAtIndex(index) {}
 
-    clear() { // clears/empties the Linked list
-        this.head = null;
-    }
+  // Remove at index
+  removeAtIndex(index) {
+    // out of range, return;
+  }
 
-    getFirst() { // returns the first node of the Linked List
-        return this.head;
-    }
+  // clear list
+  clear() {
+    this.head = null;
+    return;
+  }
 
-    getLast() {
-        let lastNode = this.head; // start at beginning, or the head
-       if (lastNode) {
+  getNthNodeFromLast(index) {
+    // if index is out of range, return;
+  }
 
-           while (lastNode.next) { // iterate recursively until last node aka next === null
-               lastNode = lastNode.next
-           }
-       }
-       return lastNode
-    }
-
-   
+  // print list data
+  printListData() {}
 }
 
-let findCycleInLinkedList = (list) => {
-    let seen = new Set(); // uses Hash Set to check if there are duplicate values
+// example usage:
+const ll = new LinkedList();
 
-    let currNode = list.head;
+// insertFirst elements into the linkedlist;
+ll.insertFirst(400);
+ll.insertFirst(300);
+ll.insertFirst(200);
+ll.insertFirst(100);
 
-    while (currNode != null) { // while loop to iterate over linked list
-        if (seen.has(currNode.data)) { // return true if found a cycle
-            return true;
-        } else {
-            seen.add(currNode.data) // if not in seen set, add the current value to seen set
-        }
-        currNode = currNode.next // loop into next node in linked list
-    }
-    return false 
-}
-
-
-let list = new LinkedList(new Node(1231313));
-list.add(5)
-list.add(7)
-list.add(99)
-list.add(5)
-// console.log(list)
-
-console.log(findCycleInLinkedList(list)) // should return true
+// ll.insertAtIndex(500, 2);
+// ll.removeAtIndex(1);
+// ll.clear();
+// ll.getNthNodeFromLast(3); // should return 200
+// ll.getAtIndex(2);
+ll.printListData();
